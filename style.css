@@ -1,0 +1,63 @@
+body {
+  background: #0E1B39;
+  text-align: center;
+}
+
+h1 {
+    color: #44B9F8;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  /* height: 100vh; */
+}
+
+.mora-jai-box {
+  position: relative;
+  background: linear-gradient(135deg, #a1866f 0%, #7b5e44 100%);
+  padding: 50px;
+  border: 8px solid #5e3a1a;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  grid-template-rows: repeat(3, 80px);
+  gap: 8px;
+}
+
+.cell {
+  background: #ccc;
+  border: 2px solid #999;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.corner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: #ccc;
+  border: 2px solid #999;
+}
+
+.top-left     { top: 5px; left: 5px; }
+.top-right    { top: 5px; right: 5px; }
+.bottom-left  { bottom: 5px; left: 5px; }
+.bottom-right { bottom: 5px; right: 5px; }
+
+.buttons {
+    margin: 10px;
+    gap: 10px;
+}
+
+label {
+    color: white;
+}

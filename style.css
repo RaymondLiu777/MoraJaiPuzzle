@@ -16,11 +16,72 @@ h1 {
 
 .mora-jai-box {
   position: relative;
+  border-radius: 30px;
+  box-shadow: 5px 5px 30px rgba(0,0,0,0.5);
+  perspective: 1000px;
+}
+
+.mora-jai-box > div {
+  border-radius: 30px;
+}
+
+.box-top {
+  position: relative;
   background: linear-gradient(135deg, #a1866f 0%, #7b5e44 100%);
   padding: 50px;
   border: 8px solid #5e3a1a;
-  border-radius: 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  transition: opacity 1s, transform 1s;
+  transform-origin: top center;
+  z-index: 2;
+  /* opacity: 0; */
+  perspective: 100px;
+  backface-visibility: hidden;
+}
+
+.box-top-back {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #73563d;
+  transition: opacity 1s, transform 1s;
+  transform-origin: top center;
+}
+
+.hide-top {
+  transform: rotateX(120deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box-bottom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: 15px solid #5e3a1a;
+  box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.5), inset 0 -5px 20px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  background-color: #73563d;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allowance-token {
+  background-color: #A16D39;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, .8);
+}
+
+.allowance-token img {
+  opacity: .7;
+  display:block;
+  rotate: 30deg;
 }
 
 .grid {
@@ -36,6 +97,7 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
 }
 
 .corner {
@@ -46,6 +108,7 @@ h1 {
   cursor: pointer;
   background: #ccc;
   border: 2px solid #999;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
 }
 
 .top-left     { top: 5px; left: 5px; }

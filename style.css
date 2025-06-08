@@ -1,10 +1,10 @@
 body {
-  background: #0E1B39;
+  background: var(--color-darkblue);
   text-align: center;
 }
 
 h1 {
-    color: #44B9F8;
+  color: var(--color-blue);
 }
 
 .container {
@@ -96,7 +96,6 @@ h1 {
   border: 2px solid #999;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
 }
 
@@ -117,10 +116,22 @@ h1 {
 .bottom-right { bottom: 5px; right: 5px; }
 
 .buttons {
-    margin: 10px;
-    gap: 10px;
+  margin: 10px;
+  gap: 10px;
 }
 
-label {
-    color: white;
+/* Colors */
+:root {
+  --game-gray: #6D767D;
+  --game-yellow: #C0BD30;
+  --game-pink: #C47DC9;
+  --game-white: #E3F0F6;
+  --game-black: #1B242B;
+  --game-orange: #CF812C;
+  --game-purple: #7E238C;
+  --game-green: #1DA22F;
+  --game-red: #99262D;
+  --game-blue: #44B9F8;
+  --color-blue: #44B9F8;
+  --color-darkblue: #0E1B39;
 }

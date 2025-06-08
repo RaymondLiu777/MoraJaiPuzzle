@@ -1,11 +1,17 @@
 document.querySelector('#load-puzzle').addEventListener('click', () => {
-  document.querySelector('.box-top').classList.add('hide-top');
-  document.querySelector('.box-top-back').classList.add('hide-top');
+  boxUnlock.play();
+  setTimeout(function () {
+    document.querySelector('.box-top').classList.add('hide-top');
+    document.querySelector('.box-top-back').classList.add('hide-top');
+  }, 300);
 });
 
 document.querySelector('.allowance-token').addEventListener('click', () => {
   document.querySelector('.box-top').classList.remove('hide-top');
   document.querySelector('.box-top-back').classList.remove('hide-top');
+  setTimeout(function () {
+    boxUnlock.play();
+  }, 700);
 });
 
 document.querySelector('#play-puzzle').addEventListener('click', () => {
@@ -15,13 +21,17 @@ document.querySelector('#play-puzzle').addEventListener('click', () => {
 moraJai = new MoraJaiBox(3)
 updateGrid();
 
+var buttonClick = new Audio('assets/button-click.mp3');
+var boxUnlock = new Audio('assets/box-unlock.mp3');
+
 document.querySelectorAll('.cell').forEach(cell => {
   cell.addEventListener('click', () => {
-    let location = convertToRowCol(cell.dataset.index); 
-    console.log(location);
-    moraJai.click(location[0], location[1]);
-    console.log(moraJai)
-    updateGrid();
+    buttonClick.play();
+    setTimeout(function () {
+      let location = convertToRowCol(cell.dataset.index); 
+      moraJai.click(location[0], location[1]);
+      updateGrid();
+    }, 150);
   });
 });
 

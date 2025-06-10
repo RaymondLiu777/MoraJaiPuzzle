@@ -34,27 +34,96 @@ class MoraJaiBox {
             }
             this.grid.push(row);
         }
+        // Create corners
+        this.corners = {
+            tl: {
+                goal: "gray",
+                clicked: false,
+            },
+            tr: {
+                goal: "gray",
+                clicked: false,
+            },
+            bl: {
+                goal: "gray",
+                clicked: false,
+            },
+            br: {
+                goal: "gray",
+                clicked: false,
+            }
+        }
+        // Solved Gamestate
+        this.solved = false;
 
         this.loadPuzzle([
-            ["pink", "black", "orange"],
-            ["red", "white", "red"],
-            ["gray", "black", "green"],
-        ]);
+            ["green", "black", "green"],
+            ["black", "black", "black"],
+            ["green", "yellow", "green"],
+        ], ["black", "black", "black", "black"]);
     }
 
-    loadPuzzle(puzzle) {
+    loadPuzzle(puzzle, goal) {
         this.grid = structuredClone(puzzle);
+        this.corners = {
+            tl: {
+                goal: goal[0],
+                clicked: false,
+            },
+            tr: {
+                goal: goal[1],
+                clicked: false,
+            },
+            bl: {
+                goal: goal[2],
+                clicked: false,
+            },
+            br: {
+                goal: goal[3],
+                clicked: false,
+            }
+        }
         this.start = structuredClone(puzzle);
+        this.solved = false;
     }
 
-    click(row, col) {
+    clickGrid(row, col) {
         let old_grid = this.grid;
         this.grid = structuredClone(old_grid);
         MoraJaiBox.colors[this.grid[row][col]].action(row, col, this.grid);
     }
+    
+    clickCorner(location) {
+        if(location == "tl" && this.grid[0][0] == this.corners[location].goal) {
+            this.corners[location].clicked = true; 
+        }
+        else if(location == "tr" && this.grid[0][this.grid.length - 1] == this.corners[location].goal) {
+            this.corners[location].clicked = true; 
+        }
+        else if(location == "bl" && this.grid[this.grid.length - 1][0] == this.corners[location].goal) {
+            this.corners[location].clicked = true; 
+        }
+        else if(location == "br" && this.grid[this.grid.length - 1][this.grid.length - 1] == this.corners[location].goal) {
+            this.corners[location].clicked = true; 
+        }
+        else {
+            this.resetPuzzle();
+        }
+        // Check for win
+        this.solved = true;
+        for(const location of ["tl", "tr", "bl", "br"]) {
+            if(!this.corners[location].clicked) {
+                this.solved = false;
+            }
+        }
+    }
 
     resetPuzzle() {
         this.grid = structuredClone(this.start);
+        for(const location of ["tl", "tr", "bl", "br"]) {
+            this.corners[location].clicked = false;
+        }
+        this.solved = false;
     }
 
 }

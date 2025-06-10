@@ -106,14 +106,15 @@ h1 {
   border-radius: 50%;
   cursor: pointer;
   background: #ccc;
-  border: 2px solid #999;
+  border: 5px solid #999;
+  box-sizing: border-box;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
 }
 
-.top-left     { top: 5px; left: 5px; }
-.top-right    { top: 5px; right: 5px; }
-.bottom-left  { bottom: 5px; left: 5px; }
-.bottom-right { bottom: 5px; right: 5px; }
+.top-left     { top: 8px; left: 8px; }
+.top-right    { top: 8px; right: 8px; }
+.bottom-left  { bottom: 8px; left: 8px; }
+.bottom-right { bottom: 8px; right: 8px; }
 
 .buttons {
   margin: 10px;

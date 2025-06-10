@@ -136,3 +136,17 @@ h1 {
   --color-blue: #44B9F8;
   --color-darkblue: #0E1B39;
 }
+
+.playfair-display-font {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.gelasio-font {
+  font-family: "Gelasio", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

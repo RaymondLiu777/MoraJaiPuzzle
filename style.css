@@ -93,7 +93,7 @@ h1 {
 
 .cell {
   background: #ccc;
-  border: 2px solid #999;
+  border: 4px solid #5e3a1a;
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
@@ -106,7 +106,7 @@ h1 {
   border-radius: 50%;
   cursor: pointer;
   background: #ccc;
-  border: 5px solid #999;
+  border: 4px solid #999;
   box-sizing: border-box;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, .8);
 }
@@ -124,14 +124,14 @@ h1 {
 /* Colors */
 :root {
   --game-gray: #6D767D;
-  --game-yellow: #C0BD30;
-  --game-pink: #C47DC9;
+  --game-yellow: #e6e33f;
+  --game-pink: #e691ec;
   --game-white: #E3F0F6;
   --game-black: #1B242B;
-  --game-orange: #CF812C;
-  --game-purple: #7E238C;
-  --game-green: #1DA22F;
-  --game-red: #99262D;
+  --game-orange: #fa9a33;
+  --game-purple: #982aa8;
+  --game-green: #22c738;
+  --game-red: #b32c35;
   --game-blue: #44B9F8;
   --color-blue: #44B9F8;
   --color-darkblue: #0E1B39;

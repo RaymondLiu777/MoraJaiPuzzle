@@ -1,78 +1,181 @@
 class MoraJaiBox {
-    constructor(size) {
-        // set up colors
-        this.colors = {
-            gray: { name: "gray", action: this.gray.bind(this) },
-            black: { name: "black", action: this.black.bind(this) },
-            red: { name: "red", action: this.red.bind(this) },
-            white: { name: "white", action: this.white.bind(this) },
-        };
-        // Name to color array
-        this.nameToColor = {};
-        for (const [key, value] of Object.entries(this.colors)) {
-            this.nameToColor[value.name] = value;
+    // Static functions for configuring colors
+    static colors = {}
+
+    static adjacent = [[0, 1], [0, -1], [1, 0], [-1, 0]];
+
+    static clockwiseRotation = [[-1, -1], [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1]];
+
+    static registerColor(color, action) {
+        if(!(color in MoraJaiBox.colors)) {
+            MoraJaiBox.colors[color] = {
+                name: color,
+                action: action,
+            }
         }
-        console.log(this.nameToColor);
+        else {
+            console.log("Error color already registered:", color)
+        }
+    }
+
+    static inGrid(row, col, grid) {
+        return row >= 0 && row < grid.length && col >= 0 && col < grid.length;
+    }
+
+    constructor(size) {
+        console.log(MoraJaiBox.colors)
         // Create grid
         this.size = size;
         this.grid = new Array();
         for(let i = 0; i < size; i++) {
             let row = new Array();
             for(let j = 0; j < size; j++) {
-                row.push(this.colors.gray.name);
+                row.push(MoraJaiBox.colors.gray.name);
             }
             this.grid.push(row);
         }
-        this.grid[1][1] = this.colors.white.name;
+
+        this.loadPuzzle([
+            ["pink", "black", "orange"],
+            ["red", "white", "red"],
+            ["gray", "black", "green"],
+        ]);
+    }
+
+    loadPuzzle(puzzle) {
+        this.grid = structuredClone(puzzle);
+        this.start = structuredClone(puzzle);
     }
 
     click(row, col) {
         let old_grid = this.grid;
         this.grid = structuredClone(old_grid);
-        this.colors[this.grid[row][col]].action(row, col, old_grid);
+        MoraJaiBox.colors[this.grid[row][col]].action(row, col, this.grid);
     }
 
-    gray(row, col, old_grid) {
-        // Does nothing if clicked
-    }
-
-    black(row, col, old_grid) {
-        // Move row to the right
-        for(let j = 0; j < this.size; j++) {
-            this.grid[row][(j+1)%size] = old_grid[row][j];
-        }
-    }
-
-    red(row, col, old_grid) {
-        // Change White to Black and Black to Red
-        for(let i = 0; i < this.size; i++) {
-            for(let j = 0; j < this.size; j++) {
-                if(old_grid[i][j] == this.colors.black.name) {
-                    this.grid[i][j] == this.colors.red.name;
-                }
-                if(old_grid[i][j] == this.colors.white.name) {
-                    this.grid[i][j] == this.colors.black.name;
-                }
-            }
-        }
-    }
-
-    white(row, col, old_grid) {
-        // Make adjacent gray squares white
-        let adjacent = [[0, 1], [0, -1], [1, 0], [-1, 0]];
-        for (let [x, y] of adjacent) {
-            let new_row = row + x;
-            let new_col = col + y;
-            if(new_row >= 0 && new_row < this.size && new_col >= 0 && new_col < this.size) {
-                if(old_grid[new_row][new_col] == this.colors.gray.name) {
-                    this.grid[new_row][new_col] = this.colors.white.name;
-                }
-                else if(old_grid[new_row][new_col] == this.colors.white.name) {
-                    this.grid[new_row][new_col] = this.colors.gray.name;
-                }
-            }
-        }
-        this.grid[row][col] = this.colors.gray.name;
+    resetPuzzle() {
+        this.grid = structuredClone(this.start);
     }
 
 }
+
+// Does nothing if clicked
+MoraJaiBox.registerColor("gray", function(row, col, grid) {});
+
+// Move row to the right
+MoraJaiBox.registerColor("black", function(row, col, grid) {
+    let lastColor = grid[row][grid.length - 1]
+    for(let j = grid.length - 2; j >= 0; j--) {
+        grid[row][(j+1)%grid.length] = grid[row][j];
+    }
+    grid[row][0] = lastColor;
+});
+
+// Change White to Black and Black to Red
+MoraJaiBox.registerColor("red", function(row, col, grid) {
+    for(let i = 0; i < grid.length; i++) {
+        for(let j = 0; j < grid.length; j++) {
+            if(grid[i][j] == MoraJaiBox.colors.black.name) {
+                grid[i][j] = MoraJaiBox.colors.red.name;
+            }
+            if(grid[i][j] == MoraJaiBox.colors.white.name) {
+                grid[i][j] = MoraJaiBox.colors.black.name;
+            }
+        }
+    }
+});
+
+// Make adjacent gray squares white
+MoraJaiBox.registerColor("white", function(row, col, grid) {
+    for (let [x, y] of MoraJaiBox.adjacent) {
+        let new_row = row + x;
+        let new_col = col + y;
+        if(MoraJaiBox.inGrid(new_row, new_col, grid)) {
+            if(grid[new_row][new_col] == MoraJaiBox.colors.gray.name) {
+                grid[new_row][new_col] = MoraJaiBox.colors.white.name;
+            }
+            else if(grid[new_row][new_col] == MoraJaiBox.colors.white.name) {
+                grid[new_row][new_col] = MoraJaiBox.colors.gray.name;
+            }
+        }
+    }
+    grid[row][col] = MoraJaiBox.colors.gray.name;
+});
+
+// Swap with opposite tile
+MoraJaiBox.registerColor("green", function(row, col, grid) {
+    let size = grid.length;
+    let swapRow = size - row - 1;
+    let swapCol = size - col - 1;
+    let swapColor = grid[swapRow][swapCol];
+    grid[swapRow][swapCol] = grid[row][col];
+    grid[row][col] = swapColor;
+});
+
+// Swap with tile above
+MoraJaiBox.registerColor("yellow", function(row, col, grid) {
+    if(row > 0) {
+        let swapColor = grid[row - 1][col];
+        grid[row - 1][col] = grid[row][col];
+        grid[row][col] = swapColor;
+    }
+});
+
+// Swap with tile below
+MoraJaiBox.registerColor("purple", function(row, col, grid) {
+    if(row < grid.length - 1) {
+        let swapColor = grid[row + 1][col];
+        grid[row + 1][col] = grid[row][col];
+        grid[row][col] = swapColor;
+    }
+});
+
+// Move all tiles around it in a clockwise rotation
+MoraJaiBox.registerColor("pink", function(row, col, grid) {
+    // Calculate all nearby positions that are on the grid
+    let validPosition = [];
+    for (let [x, y] of MoraJaiBox.clockwiseRotation) {
+        if(MoraJaiBox.inGrid(row + x, col + y, grid)) {
+            validPosition.push([row + x, col + y]);
+        }
+    }
+    // Rotate clockwise
+    let lastColor = grid[validPosition[validPosition.length - 1][0]][validPosition[validPosition.length - 1][1]];
+    for (let i = validPosition.length - 2; i >= 0; i--) {
+        grid[validPosition[i+1][0]][validPosition[i+1][1]] = grid[validPosition[i][0]][validPosition[i][1]];
+    }
+    grid[validPosition[0][0]][validPosition[0][1]] = lastColor;
+});
+
+// Turn into the color of the most frequent adjacent tile color
+MoraJaiBox.registerColor("orange", function(row, col, grid) {
+    // Count nearby colors
+    let nearbyColors = {}
+    for (let [x, y] of MoraJaiBox.adjacent) {
+        let new_row = row + x;
+        let new_col = col + y;
+        if(MoraJaiBox.inGrid(new_row, new_col, grid)) {
+            let color = grid[new_row][new_col];
+            if(!(color in nearbyColors)) {
+                nearbyColors[color] = 0;
+            }
+            nearbyColors[color] += 1;
+        }
+    }
+    // Calculate majority
+    let majorityColor = "";
+    let majorityCount = 0;
+    let tie = false;
+     for (let [color, count] of Object.entries(nearbyColors)) {
+        if (count > majorityCount) {
+            majorityCount = count;
+            majorityColor = color;
+            tie = false;
+        } else if (count === majorityCount) {
+            tie = true;
+        }
+    }
+    if (!tie) {
+        grid[row][col] = majorityColor;
+    }
+});

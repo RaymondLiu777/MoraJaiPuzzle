@@ -14,6 +14,16 @@ document.querySelector('.allowance-token').addEventListener('click', () => {
   }, 700);
 });
 
+document.querySelectorAll('.corner-button').forEach(cornerButton => {
+  cornerButton.addEventListener('click', () => {
+    buttonClick.play();
+    setTimeout(function () {
+      moraJai.resetPuzzle();
+      updateGrid();
+    }, 150);
+  });
+});
+
 document.querySelector('#play-puzzle').addEventListener('click', () => {
   updateGrid();
 });

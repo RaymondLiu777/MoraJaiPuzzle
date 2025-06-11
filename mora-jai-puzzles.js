@@ -66,7 +66,7 @@ MoraJaiBox.registerLevel("sanctum-4", "sanctum-8",
     [[ "yellow", "purple", "yellow"],
     [ "green", "red", "black"],
     [ "purple", "purple", "purple"]],
-    ["white", "white", "white", "white"]
+    ["purple", "purple", "purple", "purple"]
 );
 
 MoraJaiBox.registerLevel("sanctum-5", "sanctum-6",

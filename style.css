@@ -19,6 +19,7 @@ h1 {
   border-radius: 30px;
   box-shadow: 5px 5px 30px rgba(0,0,0,0.5);
   perspective: 1000px;
+  margin-bottom: 30px;
 }
 
 .mora-jai-box > div {

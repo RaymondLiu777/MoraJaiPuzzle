@@ -93,8 +93,10 @@ document.querySelector('.allowance-token').addEventListener('click', () => {
 });
 
 // Load level input
-document.querySelector('#load-puzzle').addEventListener('click', ()=> {
+document.querySelector('#load-puzzle').addEventListener('submit', (e)=> {
+  e.preventDefault()
   let loadPuzzle = document.querySelector('#puzzle-code').value;
   moraJai.loadLevel(loadPuzzle);
   updateGrid();
+  document.querySelector('#puzzle-code').value = "";
 })

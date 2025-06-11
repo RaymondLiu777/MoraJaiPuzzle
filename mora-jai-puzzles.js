@@ -29,7 +29,7 @@ MoraJaiBox.registerLevel("tomb", "closed-exhibition",
     ["purple", "purple", "purple", "purple"]
 );
 
-MoraJaiBox.registerLevel("closed-exhibition", "sanctum1",
+MoraJaiBox.registerLevel("closed-exhibition", "sanctum-1",
     [[ "orange", "black", "orange"],
     [ "orange", "red", "orange"],
     [ "orange", "black", "orange"]],
@@ -89,7 +89,7 @@ MoraJaiBox.registerLevel("sanctum-7", "sanctum-2",
     [ "orange", "orange", "orange"]],
     ["pink", "pink", "pink", "pink"]
 );
-MoraJaiBox.registerLevel("sanctum-8", "",
+MoraJaiBox.registerLevel("sanctum-8", "aries-court-1",
     [[ "green", "gray", "green"],
     [ "gray", "orange", "orange"],
     [ "gray", "black", "purple"]],

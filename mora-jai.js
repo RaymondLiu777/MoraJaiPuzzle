@@ -49,10 +49,8 @@ function clickButton(action) {
   }, 150);
 }
 
-var buttonClick = new Audio('assets/button-click.mp3');
-buttonClick.preload = 'auto';
-var boxUnlock = new Audio('assets/box-unlock.mp3');
-boxUnlock.preload = 'auto';
+var buttonClick = document.getElementById("btn-sound");
+var boxUnlock = document.getElementById("box-sound");
 
 moraJai = new MoraJaiBox(3)
 updateGrid();

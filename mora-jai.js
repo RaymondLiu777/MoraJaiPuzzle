@@ -50,7 +50,9 @@ function clickButton(action) {
 }
 
 var buttonClick = new Audio('assets/button-click.mp3');
+buttonClick.preload = 'auto';
 var boxUnlock = new Audio('assets/box-unlock.mp3');
+boxUnlock.preload = 'auto';
 
 moraJai = new MoraJaiBox(3)
 updateGrid();

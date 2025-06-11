@@ -26,6 +26,29 @@ function convertToRowCol(number) {
   return [Math.floor(number/moraJai.size), number % moraJai.size];
 }
 
+function unlockBox() {
+  boxUnlock.play();
+  setTimeout(function () {
+    document.querySelector('.box-top').classList.add('hide-top');
+    document.querySelector('.box-top-back').classList.add('hide-top');
+  }, 300);
+}
+
+function closeBox() {
+  document.querySelector('.box-top').classList.remove('hide-top');
+  document.querySelector('.box-top-back').classList.remove('hide-top');
+  setTimeout(function () {
+    boxUnlock.play();
+  }, 600);
+}
+
+function clickButton(action) {
+  buttonClick.play();
+  setTimeout(function () {
+    action();
+  }, 150);
+}
+
 var buttonClick = new Audio('assets/button-click.mp3');
 var boxUnlock = new Audio('assets/box-unlock.mp3');
 
@@ -36,12 +59,11 @@ updateGrid();
 document.querySelectorAll('.cell').forEach(cell => {
   cell.addEventListener('click', () => {
     // Play sound then update grid
-    buttonClick.play();
-    setTimeout(function () {
+    clickButton(function () {
       let location = convertToRowCol(cell.dataset.index); 
       moraJai.clickGrid(location[0], location[1]);
       updateGrid();
-    }, 150);
+    });
   });
 });
 
@@ -49,32 +71,30 @@ document.querySelectorAll('.cell').forEach(cell => {
 document.querySelectorAll('.corner-button').forEach(cornerButton => {
   cornerButton.addEventListener('click', () => {
     // Play sound and then update the grid after .15 seconds
-    buttonClick.play();
-    setTimeout(function () {
+    clickButton(function () {
       moraJai.clickCorner(cornerButton.dataset.index);
       updateGrid();
       // Check if solved
       if(moraJai.solved) {
         // Play unlocking sound and open box after .3 seconds
         setTimeout(function () {
-          boxUnlock.play();
-          setTimeout(function () {
-            document.querySelector('.box-top').classList.add('hide-top');
-            document.querySelector('.box-top-back').classList.add('hide-top');
-          }, 300);
+          unlockBox();
         }, 300);
       }
-    }, 150);
+    });
   });
 });
 
 // Allowance token click event, if clicked close box and reset puzzle
 document.querySelector('.allowance-token').addEventListener('click', () => {
-  document.querySelector('.box-top').classList.remove('hide-top');
-  document.querySelector('.box-top-back').classList.remove('hide-top');
-  setTimeout(function () {
-    boxUnlock.play();
-  }, 600);
-  moraJai.resetPuzzle();
+  closeBox();
+  moraJai.nextLevel();
   updateGrid();
 });
+
+// Load level input
+document.querySelector('#load-puzzle').addEventListener('click', ()=> {
+  let loadPuzzle = document.querySelector('#puzzle-code').value;
+  moraJai.loadLevel(loadPuzzle);
+  updateGrid();
+})

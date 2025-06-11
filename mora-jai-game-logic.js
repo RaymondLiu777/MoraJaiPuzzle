@@ -1,6 +1,7 @@
 class MoraJaiBox {
     // Static functions for configuring colors
     static colors = {}
+    static puzzles = {}
 
     static adjacent = [[0, 1], [0, -1], [1, 0], [-1, 0]];
 
@@ -15,6 +16,20 @@ class MoraJaiBox {
         }
         else {
             console.log("Error color already registered:", color)
+        }
+    }
+
+    static registerLevel(level, next, grid, goal) {
+        if(!(level in MoraJaiBox.puzzles)) {
+            MoraJaiBox.puzzles[level] = {
+                name: level,
+                next: next,
+                grid: grid,
+                goal: goal,
+            }
+        }
+        else {
+            console.log("Error puzzle already registered:", color)
         }
     }
 
@@ -55,15 +70,39 @@ class MoraJaiBox {
         }
         // Solved Gamestate
         this.solved = false;
+        this.levelName = "";
 
-        this.loadPuzzle([
-            ["green", "black", "green"],
-            ["black", "black", "black"],
-            ["green", "yellow", "green"],
-        ], ["black", "black", "black", "black"]);
+        this.loadLevel("master-bedroom");
     }
 
     loadPuzzle(puzzle, goal) {
+        // Validate colors
+        let valid = true;
+        if(puzzle.length != 3) {
+            valid = false;
+        }
+        for(let i = 0; i < puzzle.length; i++) {
+            if(puzzle[i].length != 3) {
+                valid = false;
+            }
+            for(let j = 0; j < puzzle[i].length; j++) {
+                if(!(puzzle[i][j] in MoraJaiBox.colors)) {
+                    valid = false
+                }
+            }
+        }
+        if(goal.length != 4) {
+            valid = false;
+        }
+        for(let i = 0; i < goal.length; i++) {
+            if(!(goal[i] in MoraJaiBox.colors)) {
+                valid = false;
+            }
+        }
+        if(!valid) {
+            console.log("Invalid puzzle", puzzle, goal);
+            return;
+        }
         this.grid = structuredClone(puzzle);
         this.corners = {
             tl: {
@@ -85,6 +124,22 @@ class MoraJaiBox {
         }
         this.start = structuredClone(puzzle);
         this.solved = false;
+    }
+
+    loadLevel(levelName) {
+        if(levelName in MoraJaiBox.puzzles) {
+            this.levelName = levelName;
+            this.loadPuzzle(MoraJaiBox.puzzles[levelName].grid, MoraJaiBox.puzzles[levelName].goal)
+        }
+    }
+
+    nextLevel() {
+        if(this.levelName in MoraJaiBox.puzzles) {
+            let nextLevel = MoraJaiBox.puzzles[this.levelName].next;
+            if(nextLevel in MoraJaiBox.puzzles) {
+                this.loadLevel(nextLevel);
+            }
+        }
     }
 
     clickGrid(row, col) {

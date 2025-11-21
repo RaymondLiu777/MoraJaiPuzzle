@@ -3,6 +3,10 @@
 
 Recreation of the Mora Jai Boxes that can be found around the game Blue Prince.
 
+Try it out [here](https://github.com/RaymondLiu777/MoraJaiPuzzle)
+
+
+## Technologies
 Built using plain HTML, CSS and Javascript. 
 
 ## Credits

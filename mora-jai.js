@@ -49,11 +49,16 @@ function clickButton(action) {
   }, 150);
 }
 
+function updateLevelName(name) {
+  document.getElementById("puzzle-code").value = name;
+}
+
 var buttonClick = document.getElementById("btn-sound");
 var boxUnlock = document.getElementById("box-sound");
 
 moraJai = new MoraJaiBox(3)
 updateGrid();
+updateLevelName(moraJai.levelName);
 
 // Grid buttons click events
 document.querySelectorAll('.cell').forEach(cell => {
@@ -89,6 +94,7 @@ document.querySelectorAll('.corner-button').forEach(cornerButton => {
 document.querySelector('.allowance-token').addEventListener('click', () => {
   closeBox();
   moraJai.nextLevel();
+  updateLevelName(moraJai.levelName);
   updateGrid();
 });
 
@@ -97,6 +103,6 @@ document.querySelector('#load-puzzle').addEventListener('submit', (e)=> {
   e.preventDefault()
   let loadPuzzle = document.querySelector('#puzzle-code').value;
   moraJai.loadLevel(loadPuzzle);
+  updateLevelName(moraJai.levelName);
   updateGrid();
-  document.querySelector('#puzzle-code').value = "";
 })

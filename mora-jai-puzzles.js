@@ -29,12 +29,65 @@ MoraJaiBox.registerLevel("tomb", "closed-exhibition",
     ["purple", "purple", "purple", "purple"]
 );
 
-MoraJaiBox.registerLevel("closed-exhibition", "sanctum-1",
+MoraJaiBox.registerLevel("closed-exhibition", "aries-court-1",
     [[ "orange", "black", "orange"],
     [ "orange", "red", "orange"],
     [ "orange", "black", "orange"]],
     ["red", "red", "red", "red"]
 );
+
+/*
+* Aries Court Puzzles
+*/
+MoraJaiBox.registerLevel("aries-court-1", "aries-court-2",
+    [[ "black", "black", "black"],
+    [ "green", "black", "gray"],
+    [ "gray", "gray", "pink"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-2", "aries-court-3",
+    [[ "orange", "gray", "purple"],
+    [ "orange", "gray", "purple"],
+    [ "black", "black", "black"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-3", "aries-court-4",
+    [[ "black", "black", "black"],
+    [ "gray", "gray", "gray"],
+    [ "pink", "purple", "orange"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-4", "aries-court-5",
+    [[ "black", "black", "black"],
+    [ "orange", "gray", "orange"],
+    [ "yellow", "gray", "yellow"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-5", "aries-court-6",
+    [[ "orange", "gray", "pink"],
+    [ "black", "gray", "black"],
+    [ "green", "gray", "orange"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-6", "aries-court-7",
+    [[ "black", "purple", "black"],
+    [ "gray", "gray", "gray"],
+    [ "orange", "green", "orange"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-7", "aries-court-8",
+    [[ "orange", "orange", "orange"],
+    [ "black", "green", "black"],
+    [ "purple", "green", "purple"]],
+    ["black", "black", "black", "black"]
+);
+MoraJaiBox.registerLevel("aries-court-8", "sanctum-1",
+    [[ "black", "green", "yellow"],
+    [ "black", "black", "black"],
+    [ "gray", "gray", "gray"]],
+    ["black", "black", "black", "black"]
+);
+
 
 /*
 * Sanctum Level Pack
@@ -89,64 +142,13 @@ MoraJaiBox.registerLevel("sanctum-7", "sanctum-2",
     [ "orange", "orange", "orange"]],
     ["pink", "pink", "pink", "pink"]
 );
-MoraJaiBox.registerLevel("sanctum-8", "aries-court-1",
+MoraJaiBox.registerLevel("sanctum-8", "",
     [[ "green", "gray", "green"],
     [ "gray", "orange", "orange"],
     [ "gray", "black", "purple"]],
     ["green", "green", "green", "green"]
 );
 
-/*
-* Aries Court Puzzles
-*/
-MoraJaiBox.registerLevel("aries-court-1", "aries-court-2",
-    [[ "black", "black", "black"],
-    [ "green", "black", "gray"],
-    [ "gray", "gray", "pink"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-2", "aries-court-3",
-    [[ "orange", "gray", "purple"],
-    [ "orange", "gray", "purple"],
-    [ "black", "black", "black"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-3", "aries-court-4",
-    [[ "black", "black", "black"],
-    [ "gray", "gray", "gray"],
-    [ "pink", "purple", "orange"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-4", "aries-court-5",
-    [[ "black", "black", "black"],
-    [ "orange", "gray", "orange"],
-    [ "yellow", "gray", "yellow"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-5", "aries-court-6",
-    [[ "orange", "gray", "pink"],
-    [ "black", "gray", "black"],
-    [ "green", "gray", "orange"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-6", "aries-court-7",
-    [[ "black", "purple", "black"],
-    [ "gray", "gray", "gray"],
-    [ "orange", "green", "orange"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-7", "aries-court-8",
-    [[ "orange", "orange", "orange"],
-    [ "black", "green", "black"],
-    [ "purple", "green", "purple"]],
-    ["black", "black", "black", "black"]
-);
-MoraJaiBox.registerLevel("aries-court-8", "",
-    [[ "black", "green", "yellow"],
-    [ "black", "black", "black"],
-    [ "gray", "gray", "gray"]],
-    ["black", "black", "black", "black"]
-);
 
 
 // MoraJaiBox.registerLevel("underpass", "",
